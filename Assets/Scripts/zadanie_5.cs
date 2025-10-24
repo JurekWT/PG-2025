@@ -16,14 +16,26 @@ public class zadanie_5 : MonoBehaviour
     {
         float x = UnityEngine.Random.Range(-45f, 45f);
         float z = UnityEngine.Random.Range(-45f, 45f);
-        Vector3 position = new Vector3(x, 5, z);
+        Vector3 position = new Vector3(x, 2.5f, z);
         return position;
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-
+        int cubesCount = 0;
+        while (cubesCount != numberOfCubes)
+        {
+            Vector3 newPosition = RandomPosition();
+            if (!Physics.CheckBox(newPosition, new Vector3(2.5f, 0.5f, 2.5f)))
+            {
+                var cube = Instantiate(CubePrefab, newPosition, Quaternion.identity);
+                cube.transform.SetParent(Plane.transform, true);
+                Material cubeMaterial = cube.GetComponent<Renderer>().material;
+                cubeMaterial.color = new Color(UnityEngine.Random.Range(0f, 1f), UnityEngine.Random.Range(0f, 1f), UnityEngine.Random.Range(0f, 1f));
+                cubesCount++;
+            }
+        }
     
     }
 
