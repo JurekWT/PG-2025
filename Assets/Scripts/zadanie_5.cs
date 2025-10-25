@@ -14,9 +14,9 @@ public class zadanie_5 : MonoBehaviour
 
     Vector3 RandomPosition()
     {
-        float x = UnityEngine.Random.Range(-45f, 45f);
-        float z = UnityEngine.Random.Range(-45f, 45f);
-        Vector3 position = new Vector3(x, 2.5f, z);
+        float x = UnityEngine.Random.Range(-4.5f, 4.5f);
+        float z = UnityEngine.Random.Range(-4.5f, 4.5f);
+        Vector3 position = new Vector3(x, 0.25f, z);
         return position;
     }
 
@@ -27,7 +27,7 @@ public class zadanie_5 : MonoBehaviour
         while (cubesCount != numberOfCubes)
         {
             Vector3 newPosition = RandomPosition();
-            if (!Physics.CheckBox(newPosition, new Vector3(2.5f, 0.5f, 2.5f)))
+            if (!Physics.CheckBox(newPosition, new Vector3(0.5f, 0.20f, 0.5f)))
             {
                 var cube = Instantiate(CubePrefab, newPosition, Quaternion.identity);
                 cube.transform.SetParent(Plane.transform, true);
