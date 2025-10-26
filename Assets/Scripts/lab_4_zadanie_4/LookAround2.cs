@@ -2,13 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LookAround : MonoBehaviour
+public class LookAround2 : MonoBehaviour
 {
     // ruch wokół osi Y będzie wykonywany na obiekcie gracza, więc
     // potrzebna nam referencja do niego (konkretnie jego komponentu Transform)
     public Transform player;
 
     public float sensitivity = 200f;
+    float xRotation = 0f;
 
     void Start()
     {
@@ -26,9 +27,11 @@ public class LookAround : MonoBehaviour
         // wykonujemy rotację wokół osi Y
         player.Rotate(Vector3.up * mouseXMove);
 
+        // ograniczenie widoku do podanego zakresu
+        xRotation -= mouseYMove;
+        xRotation = Mathf.Clamp(xRotation, -80f, 30f);
         // a dla osi X obracamy kamerę dla lokalnych koordynatów
-        // -mouseYMove aby uniknąć ofektu mouse inverse
-        transform.Rotate(new Vector3(-mouseYMove, 0f, 0f), Space.Self);
+        transform.localEulerAngles = new Vector3(xRotation, 0f, 0f);
 
     }
 }
